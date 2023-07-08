@@ -12,6 +12,7 @@ import { UsersModule } from './users/users.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { StripeModule } from './stripe/stripe.module';
 import { CreditCardsModule } from './credit-cards/creditCards.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { CreditCardsModule } from './credit-cards/creditCards.module';
     UsersModule,
     AuthenticationModule,
     CreditCardsModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [
