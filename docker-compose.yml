@@ -82,7 +82,7 @@ services:
       - data03:/usr/share/elasticsearch/data
     networks:
       - elastic 
-
+ 
 volumes:
   data01:
     driver: local
@@ -90,11 +90,10 @@ volumes:
     driver: local
   data03:
     driver: local     
-
+ 
 networks:
   postgres:
     driver: bridge
   elastic:
     driver: bridge  
 
- 
