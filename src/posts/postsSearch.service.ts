@@ -37,4 +37,43 @@ export default class PostsSearchService {
     const hits = body.hits.hits;
     return hits.map((item) => item._source);
   }
+
+  async remove(postId: number) {
+    this.elasticsearchService.deleteByQuery({
+      index: this.index,
+      body: {
+        query: {
+          match: {
+            id: postId,
+          },
+        },
+      },
+    });
+  }
+
+  async update(post: Post) {
+    const newBody: PostSearchBody = {
+      id: post.id,
+      title: post.title,
+      content: post.content,
+      authorId: post.author.id,
+    };
+    const script = Object.entries(newBody).reduce((result, [key, value]) => {
+      return `${result} ctx._source.${key}='${value}';`;
+    }, '');
+
+    return this.elasticsearchService.updateByQuery({
+      index: this.index,
+      body: {
+        query: {
+          match: {
+            id: post.id,
+          },
+        },
+        script: {
+          inline: script,
+        },
+      },
+    });
+  }
 }

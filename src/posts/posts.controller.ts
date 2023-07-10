@@ -1,14 +1,17 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
   Param,
   Post,
   Put,
+  Query,
   Req,
   UseFilters,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 
 import PostsService from './posts.service';
@@ -20,6 +23,7 @@ import { FindOneParams } from 'src/utils/findOneParams';
 import RequestWithUser from 'src/authentication/requestWithUser.interface';
 
 @Controller('posts')
+@UseInterceptors(ClassSerializerInterceptor)
 export default class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
@@ -48,5 +52,13 @@ export default class PostsController {
   @Delete(':id')
   async deletePost(@Param('id') id: string) {
     this.postsService.deletePost(Number(id));
+  }
+
+  @Get()
+  async getPosts(@Query('search') search: string) {
+    if (search) {
+      return this.postsService.searchForPosts(search);
+    }
+    return this.postsService.getAllPosts();
   }
 }
