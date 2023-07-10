@@ -12,38 +12,20 @@ services:
     networks:
     - postgres
  
-  # pgadmin:
-  #   links:
-  #   - postgres:postgres
-  #   container_name: pgadmin
-  #   image: dpage/pgadmin4
-  #   ports:
-  #   - "8080:80"
-  #   volumes:
-  #   - /data/pgadmin:/root/.pgadmin
-  #   env_file:
-  #   - docker.env
-  #   networks:
-  #   - postgres
- 
-# networks:
-#   postgres:
-#     driver: bridge
-
-# pgadmin:
-#     links:
-#       - postgres:postgres
-#     container_name: pgadmin
-#     image: dpage/pgadmin4
-#     ports:
-#       - "8080:80"
-#     volumes:
-#       - /data/pgadmin:/root/.pgadmin
-#     env_file:
-#       - docker.env
-#     networks:
-#       - postgres
- 
+  pgadmin:
+    links:
+    - postgres:postgres
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    ports:
+    - "8080:80"
+    volumes:
+    - /data/pgadmin:/root/.pgadmin
+    env_file:
+    - .env
+    networks:
+    - postgres
+  
   es01:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.1
     container_name: es01
@@ -99,7 +81,7 @@ services:
     volumes:
       - data03:/usr/share/elasticsearch/data
     networks:
-      - elastic
+      - elastic 
  
 volumes:
   data01:
@@ -107,10 +89,11 @@ volumes:
   data02:
     driver: local
   data03:
-    driver: local
+    driver: local     
  
 networks:
   postgres:
     driver: bridge
   elastic:
-    driver: bridge
+    driver: bridge  
+

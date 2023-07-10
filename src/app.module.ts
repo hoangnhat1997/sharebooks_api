@@ -13,6 +13,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { StripeModule } from './stripe/stripe.module';
 import { CreditCardsModule } from './credit-cards/creditCards.module';
 import { CategoriesModule } from './categories/categories.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { CategoriesModule } from './categories/categories.module';
     AuthenticationModule,
     CreditCardsModule,
     CategoriesModule,
+    SearchModule,
   ],
   controllers: [AppController],
   providers: [
