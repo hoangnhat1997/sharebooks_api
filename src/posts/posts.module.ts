@@ -9,6 +9,7 @@ import { SearchModule } from 'src/search/search.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Post]), SearchModule],
+
   providers: [PostsService, PostsSearchService],
   controllers: [PostsController],
 })
