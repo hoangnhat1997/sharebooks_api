@@ -20,7 +20,7 @@ services:
     ports:
     - "8080:80"
     volumes:
-    - /data/pgadmin:/root/.pgadmin
+    - /Users/nhatpham/data/postgres:/Users/nhatpham/data/pgadmin
     env_file:
     - .env
     networks:
